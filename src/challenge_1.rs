@@ -11,7 +11,7 @@ fn apply_rules(input: &str) -> String {
         .chars()
         .map(|c| if c.is_ascii_hexdigit() { c } else { '0' })
         .collect_vec();
-    dbg!(&v);
+
     let new_len = v.len() + 3 - (v.len() % 3);
     let segment = new_len / 3;
     let mut solution = vec![];
