@@ -10,24 +10,21 @@ fn parse_input(input: &str) -> HashMap<&str, f32> {
         let ra = *acc.entry(a).or_insert(1200.0);
         let rb = *acc.entry(b).or_insert(1200.0);
 
-        // Ea = 1 / (1 + 10^((Rb-Ra)/400))
         let expected_win_rate_a = expected_win_rate(ra, rb);
         let expected_win_rate_b = 1.0 - expected_win_rate_a;
-        let points_up_for_grab = ri_prime(expected_win_rate_a);
 
-        dbg!(&a, &ra, &b, &rb, &expected_win_rate_a, &points_up_for_grab);
         if a_score.parse::<u8>().expect("a") > b_score.parse::<u8>().expect("b") {
             // a won
-            let ri_prime = 20.0 * (1.0 - expected_win_rate_a);
-            println!("{} wins {} points", &a, &ri_prime);
-            println!("{} loses {} points", &b, &ri_prime);
+            let ri_prime = ri_prime(expected_win_rate_a);
+            // println!("{} wins {} points", &a, &ri_prime);
+            // println!("{} loses {} points", &b, &ri_prime);
             acc.entry(a).and_modify(|v| *v += ri_prime);
             acc.entry(b).and_modify(|v| *v -= ri_prime);
         } else {
             // b won
-            let ri_prime = 20.0 * (1.0 - expected_win_rate_b);
-            println!("{} loses {} points in an upset", &a, &ri_prime);
-            println!("{} wins {} points in an upset", &b, &ri_prime);
+            let ri_prime = ri_prime(expected_win_rate_b);
+            // println!("{} loses {} points in an upset", &a, &ri_prime);
+            // println!("{} wins {} points in an upset", &b, &ri_prime);
             acc.entry(a).and_modify(|v| *v -= ri_prime);
             acc.entry(b).and_modify(|v| *v += ri_prime);
         };
@@ -46,7 +43,7 @@ fn ri_prime(ei: f32) -> f32 {
 pub fn solve() -> String {
     let input = read_to_string("inputs/7.txt").expect("should have read data");
     let m = parse_input(&input);
-    dbg!(&m);
+    // dbg!(&m);
     if let MinMaxResult::MinMax(min, max) = m.iter().map(|(_, v)| *v).minmax() {
         format!("{}-{}", max as u32, min as u32)
     } else {
@@ -63,11 +60,14 @@ mod tests {
     fn test_example() {
         let ei = expected_win_rate(1400.0, 1200.0);
         assert_approx_eq!(0.75, ei, 0.01);
-        let points = ri_prime(ei);
+        let a_win_pts_up_for_grabs = ri_prime(ei);
+        assert_approx_eq!(5.0, a_win_pts_up_for_grabs, 0.5);
+        let b_win_pts_up_for_grabs = ri_prime(1.0 - ei);
+        assert_approx_eq!(15.0, b_win_pts_up_for_grabs, 0.5);
     }
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve(), "dunno")
+        assert_eq!(solve(), "")
     }
 }
