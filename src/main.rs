@@ -2,6 +2,7 @@ mod challenge_0;
 mod challenge_1;
 mod challenge_2;
 mod challenge_3;
+mod challenge_32;
 mod challenge_4;
 mod challenge_5;
 mod challenge_6;
@@ -20,4 +21,5 @@ fn main() {
     println!("challenge 7 ->{}", challenge_7::solve());
     println!("challenge 8 ->{}", challenge_8::solve());
     println!("challenge 9 ->{}", challenge_9::solve());
+    println!("challenge 32 ->{}", challenge_32::solve());
 }
