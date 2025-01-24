@@ -32,7 +32,7 @@ pub fn solve() -> String {
         if home_score == "0" {
             // start a new drought if needed, otherwise don't do anything as the drought continues
             map.entry(home)
-                .and_modify(|_| ())
+                // .and_modify(|_| ())
                 .or_insert((None, Some(ScoringDrought::new(&date))));
             // println!("added new record for {home} (or continued drought)");
         } else {
@@ -48,11 +48,11 @@ pub fn solve() -> String {
                         if max.end.unwrap() - max.start < drought.end.unwrap() - drought.start {
                             d.0 = Some(drought);
                         }
-                        d.1 = None;
                     } else {
                         // println!("first drought, added as max");
-                        d.0 = Some(drought)
+                        d.0 = Some(drought);
                     }
+                    d.1 = None;
                 } else {
                     // println!("nothing to do, no drought and score was non-zero for {home}");
                 }
@@ -77,11 +77,11 @@ pub fn solve() -> String {
                         if max.end.unwrap() - max.start < drought.end.unwrap() - drought.start {
                             d.0 = Some(drought);
                         }
-                        d.1 = None;
                     } else {
                         // println!("first drought, added as max");
-                        d.0 = Some(drought)
+                        d.0 = Some(drought);
                     }
+                    d.1 = None;
                 } else {
                     // println!("nothing to do, no drought and score was non-zero for {away}");
                 }
@@ -101,7 +101,7 @@ pub fn solve() -> String {
             }
         })
         .collect();
-    dbg!(&days);
+    // dbg!(&days);
     let biggest_loser = days.iter().max_by(|a, b| a.1.cmp(&b.1)).unwrap();
     let data = map.get(biggest_loser.0).unwrap();
     //Somaliland 19000103 19020101
