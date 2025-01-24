@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fs, hash::Hash};
 
-use chrono::{Date, DateTime, NaiveDate};
+use chrono::NaiveDate;
 
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 struct ScoringDrought {
@@ -116,7 +116,6 @@ pub fn solve() -> String {
 
 #[cfg(test)]
 mod tests {
-    use chrono::ParseError;
 
     use super::*;
 
