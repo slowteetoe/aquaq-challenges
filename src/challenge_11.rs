@@ -16,15 +16,6 @@ fn parse_input(input: &str) -> Vec<((usize, usize), (usize, usize))> {
 
 type Grid = [[u8; 25]; 25];
 
-fn overlapping_shapes(grid: &mut Grid) {
-    let mut keep = false;
-    for x in 0..25 {
-        for y in 0..25 {
-            // walk the shape, gathering up all points and keeping or discarding based on if we see >= 2
-        }
-    }
-}
-
 pub fn solve() -> u32 {
     let input = fs::read_to_string("./inputs/11.txt").expect("input file");
     let mut grid: Grid = [[0u8; 25]; 25];
@@ -32,7 +23,7 @@ pub fn solve() -> u32 {
     data.iter().for_each(|(a, b)| {
         for x in a.0..b.0 {
             for y in a.1..b.1 {
-                grid[x][y] += 1;
+                grid[y][x] += 1;
             }
         }
     });
