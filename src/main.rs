@@ -3,6 +3,7 @@ mod challenge_1;
 mod challenge_10;
 mod challenge_11;
 mod challenge_14;
+mod challenge_15;
 mod challenge_17;
 mod challenge_2;
 mod challenge_3;
@@ -14,6 +15,7 @@ mod challenge_7;
 mod challenge_8;
 mod challenge_9;
 
+// ya, at some point this just looks ridiculous... maybe a macro instead?
 fn main() {
     println!("challenge 0 -> {}", challenge_0::solve());
     println!("challenge 1 ->{}", challenge_1::solve());
@@ -28,6 +30,7 @@ fn main() {
     println!("challenge 10 ->{}", challenge_10::solve());
     println!("challenge 11 ->{}", challenge_11::solve());
     println!("challenge 14 ->{}", challenge_14::solve());
+    println!("challenge 15 ->{}", challenge_15::solve());
     println!("challenge 17 ->{:?}", challenge_17::solve());
     println!("challenge 32 ->{}", challenge_32::solve());
 }
